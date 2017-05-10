@@ -11,7 +11,7 @@
     = f.text_area :name
   .field
     = f.label :time_cook
-    = f.time_select :time_cook
+    = f.time_select :time_cook, prompt: {hour: 'Choose hour', minute: 'Choose minute'}
   .field
     = f.label :instruction
     = f.text_area :instruction
