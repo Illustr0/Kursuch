@@ -28,6 +28,22 @@ ru:
       index: Список возможных ролей пользователей
       edit: Редактирование роли
       new: Новая роль
+    categories:
+      index: Категории
+      edit: Редактирование категории
+      new: Новая категория
+    dishes:
+      index: Блюда
+      edit: Редактирование блюда
+      new: Новое блюдо
+    dish_ingredients:
+      index: Связи блюд и ингредиентов
+      edit: Редактирование связи
+      new: Новая связь
+    ingredients:
+      index: Ингредиенты
+      edit: Редактирование ингредиента
+      new: Новый ингредиент
   views:
     pagination:
       first: ⇤
@@ -63,4 +79,18 @@ ru:
       user/role_users:
         <<: *role_users
       # nested_finish
-          
+      category:
+        name: Название
+        category_tree: Родительская категория
+      dish:
+        name: Название
+        time_cook: Время приготовления 
+        instruction: Инструкция
+        category: Категория
+      dish_ingredient:
+        dish: Блюдо
+        ingredient: Ингредиент
+        how_many: Сколько 
+        measure: Ед. измерения
+      ingredient:
+        short_descr: Краткое описание

@@ -8,6 +8,31 @@ module SideBarHelper
       :action => :index
     }
     result << {
+      :name => 'Категории',
+      :icon => 'list',
+      :controller => :categories, 
+      :action => :index
+    }
+    result << {
+      :name => 'Блюда',
+      :icon => 'list',
+      :controller => :dishes, 
+      :action => :index
+    }
+    result << {
+      :name => 'Блюда - Ингредиенты',
+      :icon => 'list',
+      :controller => :dish_ingredients, 
+      :action => :index
+    }
+    result << {
+      :name => 'Ингредиенты',
+      :icon => 'list',
+      :controller => :ingredients, 
+      :action => :index
+    }
+
+    result << {
       :name => 'Администрирование',
       :icon => 'users',
       :children => [

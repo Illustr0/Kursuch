@@ -1,0 +1,28 @@
+.page-header
+  %h1= t('headers.dishes.index')
+
+%table
+  %thead
+    %tr
+      %th= Dish.human_attribute_name(:name)
+      %th= Dish.human_attribute_name(:time_cook)
+      %th= Dish.human_attribute_name(:instruction)
+      %th= Dish.human_attribute_name(:category)
+      %th
+      %th
+      %th
+
+  %tbody
+    - @dishes.each do |dish|
+      %tr
+        %td= dish.name
+        %td= dish.time_cook
+        %td= dish.instruction
+        %td= dish.category.name
+        %td= link_to 'Show', dish
+        %td= link_to 'Edit', edit_dish_path(dish)
+        %td= link_to 'Destroy', dish, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Dish', new_dish_path

@@ -1,0 +1,22 @@
+.page-header
+  %h1= t('headers.ingredients.index')
+
+%table
+  %thead
+    %tr
+      %th= Ingredient.human_attribute_name(:short_descr)
+      %th
+      %th
+      %th
+
+  %tbody
+    - @ingredients.each do |ingredient|
+      %tr
+        %td= ingredient.short_descr
+        %td= link_to 'Show', ingredient
+        %td= link_to 'Edit', edit_ingredient_path(ingredient)
+        %td= link_to 'Destroy', ingredient, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Ingredient', new_ingredient_path

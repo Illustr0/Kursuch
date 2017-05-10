@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @category.name
+%p
+  %b Category tree:
+  - if @category.category_tree.nil?
+    \root
+  - else
+    @category.category_tree.name
+
+= link_to 'Edit', edit_category_path(@category)
+\|
+= link_to 'Back', categories_path

@@ -1,0 +1,28 @@
+.page-header
+  %h1= t('headers.dish_ingredients.index')
+
+%table
+  %thead
+    %tr
+      %th= DishIngredient.human_attribute_name(:dish)
+      %th= DishIngredient.human_attribute_name(:ingredient)
+      %th= DishIngredient.human_attribute_name(:how_many)
+      %th= DishIngredient.human_attribute_name(:measure)
+      %th
+      %th
+      %th
+
+  %tbody
+    - @dish_ingredients.each do |dish_ingredient|
+      %tr
+        %td= dish_ingredient.dish.name
+        %td= dish_ingredient.ingredient.short_descr
+        %td= dish_ingredient.how_many
+        %td= dish_ingredient.measure
+        %td= link_to 'Show', dish_ingredient
+        %td= link_to 'Edit', edit_dish_ingredient_path(dish_ingredient)
+        %td= link_to 'Destroy', dish_ingredient, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Dish ingredient', new_dish_ingredient_path

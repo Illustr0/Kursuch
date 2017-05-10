@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Short descr:
+  = @ingredient.short_descr
+
+= link_to 'Edit', edit_ingredient_path(@ingredient)
+\|
+= link_to 'Back', ingredients_path

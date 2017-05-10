@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  time_cook: 2017-05-10 10:08:09
+  instruction: MyText
+  category_id: 
+
+two:
+  name: MyText
+  time_cook: 2017-05-10 10:08:09
+  instruction: MyText
+  category_id: 

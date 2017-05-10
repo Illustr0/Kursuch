@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Dish:
+  = @dish_ingredient.dish.name
+%p
+  %b Ingredient:
+  = @dish_ingredient.ingredient.short_descr
+%p
+  %b How many:
+  = @dish_ingredient.how_many
+%p
+  %b Measure:
+  = @dish_ingredient.measure
+
+= link_to 'Edit', edit_dish_ingredient_path(@dish_ingredient)
+\|
+= link_to 'Back', dish_ingredients_path

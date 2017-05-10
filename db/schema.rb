@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501085108) do
+ActiveRecord::Schema.define(version: 20170510071150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.text     "name",             null: false
+    t.integer  "category_tree_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "categories", ["category_tree_id"], name: "index_categories_on_category_tree_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -31,6 +40,36 @@ ActiveRecord::Schema.define(version: 20170501085108) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "dish_ingredients", force: :cascade do |t|
+    t.integer  "dish_id"
+    t.integer  "ingredient_id"
+    t.integer  "how_many",      null: false
+    t.text     "measure",       null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "dish_ingredients", ["dish_id", "ingredient_id"], name: "index_dish_ingredients_on_dish_id_and_ingredient_id", unique: true, using: :btree
+  add_index "dish_ingredients", ["dish_id"], name: "index_dish_ingredients_on_dish_id", using: :btree
+  add_index "dish_ingredients", ["ingredient_id"], name: "index_dish_ingredients_on_ingredient_id", using: :btree
+
+  create_table "dishes", force: :cascade do |t|
+    t.text     "name",        null: false
+    t.time     "time_cook"
+    t.text     "instruction", null: false
+    t.integer  "category_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "dishes", ["category_id"], name: "index_dishes_on_category_id", using: :btree
+
+  create_table "ingredients", force: :cascade do |t|
+    t.text     "short_descr", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "role_users", force: :cascade do |t|
     t.integer  "role_id",    null: false
@@ -96,6 +135,9 @@ ActiveRecord::Schema.define(version: 20170501085108) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "dish_ingredients", "dishes"
+  add_foreign_key "dish_ingredients", "ingredients"
+  add_foreign_key "dishes", "categories"
   add_foreign_key "role_users", "roles"
   add_foreign_key "role_users", "users"
 end

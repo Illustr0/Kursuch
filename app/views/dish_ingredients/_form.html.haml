@@ -1,0 +1,23 @@
+= form_for @dish_ingredient do |f|
+  - if @dish_ingredient.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@dish_ingredient.errors.count, "error")} prohibited this dish_ingredient from being saved:"
+      %ul
+        - @dish_ingredient.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :dish
+    = f.select(:dish_id, options_for_select(Dish.all.pluck('name, id'))) 
+  -#
+  .field
+    = f.label :ingredient
+    = f.select(:ingredient_id, options_for_select(Ingredient.all.pluck('short_descr, id')))
+  .field
+    = f.label :how_many
+    = f.number_field :how_many
+  .field
+    = f.label :measure
+    = f.text_area :measure
+  .actions
+    = f.submit 'Save'

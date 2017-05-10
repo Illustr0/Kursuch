@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :dish_ingredients
+  resources :dishes
+  resources :categories
+  resources :ingredients
   resources :role_users
   resources :roles
   resources :password_resets

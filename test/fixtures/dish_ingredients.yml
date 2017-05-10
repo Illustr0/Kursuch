@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dish_id: 
+  ingredient_id: 
+  how_many: 1
+  measure: MyText
+
+two:
+  dish_id: 
+  ingredient_id: 
+  how_many: 1
+  measure: MyText
