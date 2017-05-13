@@ -29,7 +29,7 @@ class DishesController < ApplicationController
     respond_to do |format|
       if @dish.save
         format.html { redirect_to @dish, notice: 'Dish was successfully created.' }
-        format.json { render :show, status: :created, location: @dish }
+        # format.json { render :show, status: :created, location: @dish }
       else
         format.html { render :new }
         format.json { render json: @dish.errors, status: :unprocessable_entity }
@@ -42,8 +42,9 @@ class DishesController < ApplicationController
   def update
     respond_to do |format|
       if @dish.update(dish_params)
-        format.html { redirect_to @dish, notice: 'Dish was successfully updated.' }
+        format.html { render :edit }
         format.json { render :show, status: :ok, location: @dish }
+        flash[:notice] = 'Dish was successfully updated.'
       else
         format.html { render :edit }
         format.json { render json: @dish.errors, status: :unprocessable_entity }
@@ -69,6 +70,10 @@ class DishesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dish_params
-      params.require(:dish).permit(:name, :time_cook, :instruction, :category_id)
+      params.require(:dish).permit(:name, :time_cook, :instruction, :category_id,
+        dish_ingredients_attributes: [:_destroy, :dish_id, :ingredient_id, :how_many, :measure, :id,
+           ingredients_attributes: [:_destroy, :short_descr, :id]
+        ]
+      )
     end
 end

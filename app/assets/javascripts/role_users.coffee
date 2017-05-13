@@ -1,15 +1,16 @@
-# nested_start
 # Удаление одной роли
 @delete_one_ru = (link)->
   if confirm("Вы уверены?")
     link.parent().find("input[type=hidden].remove_fields").first().val("1")
     link.parent().parent().parent().parent().hide()
+
 # Включаем все кнопки удаления
 @del_all_rus = ->
   $('a.remove_role').on 'click', ->
     window.delete_one_ru($(this))
     false
   false
+
 # Включаем кнопку добавления роли
 @add_new_ru = ->
   $('#add_role_link').on 'click', ->
@@ -29,10 +30,11 @@
       window.delete_one_ru($(this))
       false    
     false
+
 # Запуск всего вышеописанного
 ru_ready = ->
   window.add_new_ru()
   window.del_all_rus()
+
 $(document).on 'page:load', ru_ready # Включаем при ajax обновлении страницы
 $(document).ready ru_ready # Включаем при обычном обновлении страницы
-# nested_finish

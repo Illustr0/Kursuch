@@ -1,0 +1,43 @@
+.col-md-6
+  %div{class: 'panel panel-'+ (i.kind_of?(Integer) ? 'success' : 'info')}
+    .panel-heading
+      Ингредиент:
+      -if i.kind_of?(Integer) 
+        = di.object.ingredient.short_descr
+      - else
+        = i
+      %span.toright
+        / %span.toright.select_ingredient
+        / = link_to_save_ingredient(di)
+
+        = link_to_edit_ingredient()
+        -# Кнопка для удаления связи роль-пользователь. См. role_users_helper 
+        = link_to_remove_ingredient(di)
+      .clearfix
+    .panel-body
+      .row
+        .col-md-12
+          .form-group.select_ingredient
+            = di.label :ingredient
+            = di.select(:ingredient_id, 
+            options_for_select(ingredient_options, di.object.ingredient_id), 
+            {}, class: 'form-control edit_ingredient',onchange: "this.form.submit();")
+            -# role_options ищите в roles_heper
+            = di.error_messages_for(:ingredient_id)
+            .form-actions
+              = di.submit nil, class: 'btn btn-primary'
+
+          .form-group.show_for_edit
+            = di.fields_for(:ingredient) do |ingr|
+              = ingr.label :short_descr
+              = ingr.text_field :short_descr, class: 'form-control'
+              = ingr.error_messages_for(:short_descr)
+              .form-actions
+                = ingr.submit nil, class: 'btn btn-primary'
+
+          .form-group
+            = di.label :how_many
+            = di.number_field :how_many, class: 'form-control'
+          .form-group
+            = di.label :measure
+            = di.text_area :measure, class: 'form-control'

@@ -1,4 +1,6 @@
 = form_for @dish do |f|
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'
   - if @dish.errors.any?
     #error_explanation
       %h2= "#{pluralize(@dish.errors.count, "error")} prohibited this dish from being saved:"
@@ -6,17 +8,9 @@
         - @dish.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :name
-    = f.text_area :name
-  .field
-    = f.label :time_cook
-    = f.time_select :time_cook, prompt: {hour: 'Choose hour', minute: 'Choose minute'}
-  .field
-    = f.label :instruction
-    = f.text_area :instruction
-  .field
-    = f.label :category
-    = f.text_field :category_id
-  .actions
-    = f.submit 'Save'
+  = render('dishes/one_dish_form', f: f)
+  - i=0
+  = f.fields_for(:dish_ingredients) do |di|
+    = di.hidden_field(:id)
+    = render('dishes/one_dish_ingredient_form', di: di, i: i + 1)
+      
