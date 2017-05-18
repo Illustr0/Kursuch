@@ -30,7 +30,7 @@ module DishIngredientsHelper
   end
 
   def link_to_edit_ingredient()
-    link_to(?#, class: 'select_ingredient', 
+    link_to(?#, class: 'show_for_choose', 
         id: 'edit_ingredient_link') do 
       fa_icon('edit', title: 'Редактировать ингредиент') + ' Править'
     end 

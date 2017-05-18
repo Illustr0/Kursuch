@@ -1,5 +1,6 @@
 class DishesController < ApplicationController
   before_action :set_dish, only: [:show, :edit, :update, :destroy]
+  # skip_before_action :verify_authenticity_token
 
   # GET /dishes
   # GET /dishes.json
@@ -29,6 +30,8 @@ class DishesController < ApplicationController
     respond_to do |format|
       if @dish.save
         format.html { redirect_to @dish, notice: 'Dish was successfully created.' }
+        format.json { render :show, status: :created, location: @dish_ingredient }
+        # format.html { redirect_to @dish, notice: 'Dish was successfully created.' }
         # format.json { render :show, status: :created, location: @dish }
       else
         format.html { render :new }
@@ -42,6 +45,7 @@ class DishesController < ApplicationController
   def update
     respond_to do |format|
       if @dish.update(dish_params)
+        # format.html { redirect_to @dish, notice: 'Dish was successfully created.' }
         format.html { render :edit }
         format.json { render :show, status: :ok, location: @dish }
         flash[:notice] = 'Dish was successfully updated.'
@@ -72,8 +76,8 @@ class DishesController < ApplicationController
     def dish_params
       params.require(:dish).permit(:name, :time_cook, :instruction, :category_id,
         dish_ingredients_attributes: [:_destroy, :dish_id, :ingredient_id, :how_many, :measure, :id,
-           ingredients_attributes: [:_destroy, :short_descr, :id]
-        ]
+          ingredient_attributes: [:id, :short_descr]
+        ] 
       )
     end
 end

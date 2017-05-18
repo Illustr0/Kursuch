@@ -1,3 +1,22 @@
+@submit_test = (t) ->
+  #a = t.attr("id")
+  #if confirm(t.id)
+    #t.form.submit()
+    #t.form.submit()
+  #  
+  ingrDescr = $('#'+t.id + ' option:selected').text()
+  alert(ingrDescr)
+  ingrID = $('#'+t.id).val()
+  frm = ('#' + t.id)
+  panel = $(frm).parent().parent().parent().parent()
+  #panel.find("input[type=hidden].ingr_id").val(ingrID)
+  #panel.find("input[type=text].ingr_descr").val(ingrDescr)
+  e = panel.find(".new_form")
+  f = e.attr("data-content")
+  e.html(f)
+
+  false
+
 # Удаление одного ингредиента
 @del_one_di = (link)->
   if confirm("Вы уверены?")
@@ -29,18 +48,18 @@
     panel.find('a.remove_ingredient').on 'click', ->
       window.del_one_di($(this))
       false    
-    panel.find('.select_ingredient').hide()
+    panel.find('.show_for_choose').hide()
     panel.find('.show_for_edit').hide()
-    panel.find('.select_ingredient').last().show()
+    #panel.find('.show_for_choose').last().show()
     false
 
 @edit_one_ingr = (link)->
-  link.parent().parent().parent().find('.select_ingredient').hide()
+  link.parent().parent().parent().find('.show_for_choose').hide()
   link.parent().parent().parent().find('.show_for_edit').show()
   #$('.show_for_edit').remove
 
 @edit_all_ingr = ->
-  $('a.select_ingredient').on 'click', ->
+  $('a.show_for_choose').on 'click', ->
     window.edit_one_ingr($(this))
     false    
   false

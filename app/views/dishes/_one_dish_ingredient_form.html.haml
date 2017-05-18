@@ -17,11 +17,42 @@
     .panel-body
       .row
         .col-md-12
+          .form-group
+            = di.label :ingredient
+            = di.select(:ingredient_id, 
+            options_for_select(ingredient_options, di.object.ingredient_id), 
+            {}, class: 'form-control edit_ingredient')
+            / ,onchange: "form.submit()")
+            -# role_options ищите в roles_heper
+            = di.error_messages_for(:ingredient_id)
+
+          .form-group
+            = di.fields_for(:ingredient) do |ingr|
+              = ingr.label :short_descr
+              = ingr.text_field :short_descr, class: 'form-control'
+              .form-actions
+                = ingr.submit nil, class: 'btn btn-primary'
+
+          .form-group
+            = di.label :how_many
+            = di.number_field :how_many, class: 'form-control'
+          .form-group
+            = di.label :measure
+            = di.text_area :measure, class: 'form-control'
+-#
+  с ончейндж 
+  с ingredients_attributes
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Vg7b6cTJ0UxUPrYpGT5Wgz74KC7EhDCl+OyjhKCfPoKTcBksN1uLNDbUUHc6IhTeD5mcs/gPPkCVs9XX43StSQ==", "dish"=>{"name"=>"Блюдо 2", "time_cook(1i)"=>"2000", "time_cook(2i)"=>"1", "time_cook(3i)"=>"1", "time_cook(4i)"=>"23", "time_cook(5i)"=>"34", "instruction"=>"Инструкция блюдо 2", "category_id"=>"2", "dish_ingredients_attributes"=>{"0"=>{"id"=>"4", "_destroy"=>"false", "ingredient_id"=>"4", "ingredient_attributes"=>{"short_descr"=>"Ингрssssssssssssssssssssss", "id"=>"4"}, "how_many"=>"0", "measure"=>"y.e"}, "1"=>{"id"=>"5", "_destroy"=>"false", "ingredient_id"=>"6", "ingredient_attributes"=>{"short_descr"=>"Ингредиент 11", "id"=>"5"}, "how_many"=>"1", "measure"=>"y.e"}, "2"=>{"id"=>"6", "_destroy"=>"false", "ingredient_id"=>"6", "ingredient_attributes"=>{"short_descr"=>"Ингредиент 22s", "id"=>"6"}, "how_many"=>"2", "measure"=>"y.e"}, "3"=>{"id"=>"2", "_destroy"=>"false", "ingredient_id"=>"1", "ingredient_attributes"=>{"short_descr"=>"Ингредиент ввdsssss", "id"=>"1"}, "how_many"=>"1", "measure"=>"1"}, "4"=>{"id"=>"12", "_destroy"=>"false", "ingredient_id"=>"2", "ingredient_attributes"=>{"short_descr"=>"Ингредиент sdadadada", "id"=>"2"}, "how_many"=>"1", "measure"=>"y.e."}}}, "id"=>"2"}
+
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"H6xuEr0DrzUrKDpgic6R7kwiABcOndHUKq9pIIgcUwva0qzXTpH1TUnC3D6q0tOzfUO0ijIW3zFH8B9zy/fAwA==", "dish"=>{"name"=>"Блюдо 2", "time_cook(1i)"=>"2000", "time_cook(2i)"=>"1", "time_cook(3i)"=>"1", "time_cook(4i)"=>"23", "time_cook(5i)"=>"34", "instruction"=>"Инструкция блюдо 2", "category_id"=>"2", "dish_ingredients_attributes"=>{"0"=>{"id"=>"24", "_destroy"=>"false", "ingredient_id"=>"6", "ingredient_attributes"=>{"short_descr"=>"Ингредиент 11", "id"=>"5"}, "how_many"=>"1", "measure"=>"y.e."}}}, "commit"=>"Сохранить", "id"=>"2"}
+      .row
+        .col-md-12
           .form-group.select_ingredient
             = di.label :ingredient
             = di.select(:ingredient_id, 
             options_for_select(ingredient_options, di.object.ingredient_id), 
-            {}, class: 'form-control edit_ingredient',onchange: "this.form.submit();")
+            {}, class: 'form-control edit_ingredient')
+            / ,onchange: "form.submit()")
             -# role_options ищите в roles_heper
             = di.error_messages_for(:ingredient_id)
             .form-actions
@@ -31,7 +62,6 @@
             = di.fields_for(:ingredient) do |ingr|
               = ingr.label :short_descr
               = ingr.text_field :short_descr, class: 'form-control'
-              = ingr.error_messages_for(:short_descr)
               .form-actions
                 = ingr.submit nil, class: 'btn btn-primary'
 
