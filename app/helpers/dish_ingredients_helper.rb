@@ -6,7 +6,7 @@ module DishIngredientsHelper
     # Все role_users в форме имеют свой номер 
     # Мы его пока заменям на фразу new_ru
     fields = form.fields_for(:dish_ingredients, new_object, 
-      :child_index => 'new_ingredient') do |di|
+      :child_index => 'new_di') do |di|
       render('dishes/one_dish_ingredient_form', di: di, i: 'Новый')
     end
     # Ссылка будет обрабатываться javascript-ом поэтому адрес фиктивный
@@ -31,8 +31,23 @@ module DishIngredientsHelper
 
   def link_to_edit_ingredient()
     link_to(?#, class: 'show_for_choose', 
-        id: 'edit_ingredient_link') do 
+        id: 'edit_ingredient_link', "data-content" => "#{link_to_cancel_edit()}") do 
       fa_icon('edit', title: 'Редактировать ингредиент') + ' Править'
     end 
   end
+
+  def link_to_new_ingredient()
+    link_to(?#, class: 'show_for_edit', 
+        id: 'new_ingredient_link', "data-content" => "#{link_to_cancel_edit()}") do 
+      fa_icon('plus', title: 'Создать ингредиент') + ' Новый'
+    end 
+  end
+
+  def link_to_cancel_edit()
+    link_to(?#, class: 'cancel_edit',
+        id: 'cancel_edit_link') do 
+      fa_icon('ban', title: 'Отменить') + ' Отменить'
+    end 
+  end
+
 end

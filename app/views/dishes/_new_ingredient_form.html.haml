@@ -1,0 +1,7 @@
+.form-group.show_for_edit
+  azazazaz edit form
+  %br
+  = di.fields_for(:ingredient, Ingredient.new()) do |ingr|
+    = ingr.hidden_field(:id, class: 'ingr_id')
+    = ingr.label :short_descr
+    = ingr.text_field :short_descr, class: 'ingr_descr form-control'

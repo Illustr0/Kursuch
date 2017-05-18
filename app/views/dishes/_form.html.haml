@@ -11,69 +11,9 @@
         - @dish.errors.full_messages.each do |message|
           %li= message
 
-  = render('dishes/one_dish_form', f: f)
+  = render('dishes/dish_form', f: f)
   - i=0
   = f.fields_for(:dish_ingredients) do |di|
     = di.hidden_field(:id)
-    -#= hidden_field_tag :authenticity_token, form_authenticity_token
-    -#!!! WARNING
-      / = render('dishes/one_dish_ingredient_form', di: di, i: i + 1)
-    - i+=1
-    .col-md-6
-      %div{class: 'panel panel-'+ (i.kind_of?(Integer) ? 'success' : 'info')}
-        .panel-heading
-          / Ингредиент:
-          -if i.kind_of?(Integer)
-            ingr_id 
-            = di.object.ingredient_id
-            ingr.id
-            = di.object.ingredient.id
-            di.id
-            = di.object.id
-            = di.object.ingredient.short_descr
-          - else
-            = i
-          %span.toright
-            / %span.toright.select_ingredient
-            / = link_to_save_ingredient(di)
-
-            = link_to_edit_ingredient()
-            -# Кнопка для удаления связи роль-пользователь. См. role_users_helper 
-            = link_to_remove_ingredient(di)
-          .clearfix
-        .panel-body
-          .row
-            .col-md-12
-              .form-group.show_for_choose
-                = di.label :ingredient
-                = di.select(:ingredient_id, 
-                options_for_select(ingredient_options, di.object.ingredient_id), 
-                {}, class: 'form-control edit_ingredient', onchange: "submit_test(this)")
-                / ,onchange: "form.submit()")
-                / onchange: "submit_test(this)"
-                -# role_options ищите в roles_heper
-                = di.error_messages_for(:ingredient_id)
-                .form-actions
-                  = di.submit "Save this", class: 'btn btn-primary'
-              -#
-                "dish_ingredients_attributes"=>{"0"=>{"id"=>"10", "_destroy"=>"false", "ingredient_id"=>"1", "how_many"=>"11", "measure"=>"y.e."}, "1"=>{"id"=>"9", "_destroy"=>"false", "ingredient_id"=>"4", "how_many"=>"12222", "measure"=>"y.e."}}}, "commit"=>"Сохранить", "id"=>"5"}
-              %div{class: "new_form", "data-content" => "#{render "one_ingredient_form"}"}
-              / .form-group.show_for_edit
-              / .form-group
-              /   = di.fields_for(:ingredient) do |ingr|
-              /     = ingr.hidden_field(:id, class: 'ingr_id')
-              /     = ingr.label :short_descr
-              /     = ingr.text_field :short_descr, class: 'ingr_descr form-control'
-              /     .form-actions
-              /       = ingr.submit nil, class: 'btn btn-primary'
-              -#
-                "dish_ingredients_attributes"=>{"0"=>{"id"=>"10", "_destroy"=>"false", "ingredient_id"=>"6", "ingredient_attributes"=>{"short_descr"=>"Ингредиент 233ыыы", "id"=>"6"}, "how_many"=>"11", "measure"=>"y.e."}, "1"=>{"id"=>"9", "_destroy"=>"false", "ingredient_id"=>"4", "ingredient_attributes"=>{"short_descr"=>"Ингредиент 00вааа", "id"=>"4"}, "how_many"=>"12222", "measure"=>"y.e."}}}, "commit"=>"Сохранить", "id"=>"5"}
-
-
-              .form-group
-                = di.label :how_many
-                = di.number_field :how_many, class: 'form-control'
-              .form-group
-                = di.label :measure
-                = di.text_area :measure, class: 'form-control'
+    = render('dishes/one_dish_ingredient_form', di: di, i: i + 1)
           

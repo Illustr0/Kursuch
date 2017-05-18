@@ -45,9 +45,8 @@ class DishesController < ApplicationController
   def update
     respond_to do |format|
       if @dish.update(dish_params)
-        # format.html { redirect_to @dish, notice: 'Dish was successfully created.' }
-        format.html { render :edit }
-        format.json { render :show, status: :ok, location: @dish }
+        format.html { redirect_to edit_dish_path(@dish) }
+        format.json { render :edit, status: :ok, location: @dish }
         flash[:notice] = 'Dish was successfully updated.'
       else
         format.html { render :edit }
