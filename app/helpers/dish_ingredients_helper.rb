@@ -30,7 +30,7 @@ module DishIngredientsHelper
   end
 
   def link_to_edit_ingredient()
-    link_to(?#, class: 'show_for_choose', 
+    link_to(?#, class: 'show_for_choose edit_ingredient', 
         id: 'edit_ingredient_link', "data-content" => "#{link_to_cancel_edit()}") do 
       fa_icon('edit', title: 'Редактировать ингредиент') + ' Править'
     end 
@@ -47,6 +47,13 @@ module DishIngredientsHelper
     link_to(?#, class: 'cancel_edit',
         id: 'cancel_edit_link') do 
       fa_icon('ban', title: 'Отменить') + ' Отменить'
+    end 
+  end
+
+  def link_to_destroy_ingredient()
+    link_to(?#, class: 'show_for_choose destroy_ingredient',
+        id: 'destroy_ingredient_link') do 
+      fa_icon('trash', title: 'Уничтожить ингредиент') + ' Удалить ингредиент из всех блюд'
     end 
   end
 

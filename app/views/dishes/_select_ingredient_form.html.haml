@@ -1,8 +1,9 @@
 .form-group.show_for_choose
-  azazazaz select ingr
-  %br
   = di.label :ingredient
   = di.select(:ingredient_id, 
   options_for_select(ingredient_options, di.object.ingredient_id), 
   {}, class: 'form-control edit_ingredient choose_ingr')
   = di.error_messages_for(:ingredient_id)
+  = di.fields_for(:ingredient) do |ingr|
+    = ingr.hidden_field(:_destroy, class: 'remove_ingr')
+  = link_to_destroy_ingredient()

@@ -19,6 +19,30 @@
     false
   false
 
+# Удаление одного ингредиента
+@del_one_ingr = (link)->
+  if confirm("Вы уверены? Данное действие удалит ингредиент из ВСЕХ блюд!")
+    link.parent().find("input[type=hidden].remove_ingr").first().val("1")
+    #link.parent().parent().parent().hide()
+    panel = link.parent().parent().parent().parent().parent()
+    panel.find('.panel-body').hide()
+    panel.removeClass('panel-success')
+    panel.addClass('panel-danger')
+    panel.find('span').remove()
+    msg = panel.find('.panel-heading').text()
+    panel.find('.panel-heading').text(msg + 'будет удален. Для применения изменений нажмите "Сохранить". Для отмены перезагрузите страницу.')
+
+
+
+# Включаем все кнопки удаления
+@del_all_ingrs = ->
+  $('a.destroy_ingredient').on 'click', ->
+    window.del_one_ingr($(this))
+    false
+  false
+
+
+
 # Включаем кнопку добавления роли
 @add_new_di = ->
   $('#add_ingredient_link').on 'click', ->
@@ -38,6 +62,7 @@
       window.del_one_di($(this))
       false  
     panel.find('.show_for_choose').hide()
+    panel.find('.show_for_choose').last().remove()
     panel.find('.show_for_choose').last().show()
     panel.find('#new_ingredient_link').on 'click', ->
       window.new_ingr_form($(this))
@@ -92,7 +117,7 @@
     false
 
 @edit_all_ingr = ->
-  $('a.show_for_choose').on 'click', ->
+  $('a.edit_ingredient').on 'click', ->
     window.edit_one_ingr($(this))
     false    
   false
@@ -113,6 +138,7 @@ di_ready = ->
   window.edit_all_ingr()
   window.hide_edit_form()
   window.submit_link()
+  window.del_all_ingrs()
 
 
 $(document).on 'page:load', di_ready # Включаем при ajax обновлении страницы
@@ -122,23 +148,3 @@ $(document).ready di_ready # Включаем при обычном обновл
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-###
-  @submit_test = (t) ->
-  #a = t.attr("id")
-  #if confirm(t.id)
-    #t.form.submit()
-    #t.form.submit()
-  #  
-  ingrDescr = $('#'+t.id + ' option:selected').text()
-  #alert(ingrDescr)
-  ingrID = $('#'+t.id).val()
-  frm = ('#' + t.id)
-  panel = $(frm).parent().parent().parent().parent()
-  e = panel.find(".new_form")
-  f = e.attr("data-content")
-  e.html(f)
-  panel.find("input[type=hidden].ingr_id").val(ingrID)
-  panel.find("input[type=text].ingr_descr").val(ingrDescr)
-
-  false
-###

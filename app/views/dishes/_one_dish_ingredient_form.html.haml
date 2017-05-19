@@ -33,12 +33,17 @@
           %div{class: "new_form", "data-content" => "#{render "new_ingredient_form", di: di}"}
           
           %div{class: "select_form", "data-content" => "#{render "select_ingredient_form", di: di}"}
-
+      .row
+        .col-md-6
           .form-group
             = di.label :how_many
             = di.number_field :how_many, class: 'form-control'
+        .col-md-6
           .form-group
             = di.label :measure
             = di.text_field :measure, class: 'form-control'
+      .row
+        .col-md-12
           .form-actions
             = di.submit nil, class: 'btn btn-primary'
+          

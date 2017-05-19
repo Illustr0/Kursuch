@@ -2,7 +2,8 @@
   %h1= t('headers.dishes.edit')
 
 = render 'form'
-
-= link_to 'Show', @dish
-\|
-= link_to 'Back', dishes_path
+.row
+  .col-md-12
+    = link_to 'Show', @dish
+    \|
+    = link_to 'Back', dishes_path
