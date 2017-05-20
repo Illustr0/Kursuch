@@ -1,0 +1,8 @@
+- categories.each do |subcategory|
+  .col-md-12
+    .form-group
+      = link_to ?#, class: 'show_me' do
+        = fa_icon :eye
+      = link_to subcategory.name, ?#, class: 'uu'
+      / .form-group
+      = render('categories/index_tree', categories: subcategory.children)

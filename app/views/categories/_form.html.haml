@@ -8,9 +8,9 @@
 
   .field
     = f.label :name
-    = f.text_area :name
+    = f.text_field :name, class: 'form-control'
   .field
     = f.label :category_tree
-    = f.select(:category_tree_id, options_for_select(Category.all.pluck('name, id')))
+    = f.select(:category_tree_id, options_for_select(main_category_options), include_blank: true)
   .actions
-    = f.submit 'Save'
+    = f.submit nil, class: 'btn btn-primary'

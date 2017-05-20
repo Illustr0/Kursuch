@@ -1,6 +1,6 @@
 class DishIngredientsController < ApplicationController
   before_action :set_dish_ingredient, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :check_app_auth, only: [:index, :show, :new]
   # GET /dish_ingredients
   # GET /dish_ingredients.json
   def index

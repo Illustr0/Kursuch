@@ -1,5 +1,11 @@
+=breadcrumb_tag do
+  %li.active
+    = t('headers.categories.new')
+  %li
+    = link_to 'Категории', categories_path
+  
 .page-header
-  %h1= t('headers.category.new')
+  %h1= t('headers.categories.new')
 
 = render 'form'
 

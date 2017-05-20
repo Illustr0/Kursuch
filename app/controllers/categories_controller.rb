@@ -1,10 +1,13 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :check_app_auth, only: [:index, :show]
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    # @categories = Category.all
+    @categories = Category.where(category_tree: nil)
+    # @categories = Category.all
+
   end
 
   # GET /categories/1

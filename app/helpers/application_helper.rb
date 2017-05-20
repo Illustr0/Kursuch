@@ -6,4 +6,8 @@ module ApplicationHelper
   def breadcrumb_tag(&block)
     render 'application/breadcrumb', block: capture(&block)
   end
+
+  def user_admin?()
+     return !@current_user.roles.find_by_name("admin").nil?
+  end
 end
