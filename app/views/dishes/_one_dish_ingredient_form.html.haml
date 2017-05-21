@@ -4,22 +4,12 @@
       / Ингредиент:
       -#
       -if i.kind_of?(Integer)
-        / ingr_id 
-        / = di.object.ingredient_id
-        / ingr.id
-        / = di.object.ingredient.id
-        / di.id
-        / = di.object.id
         = di.object.ingredient.short_descr
       - else
         = i
       %span.toright
-        / %span.toright.select_ingredient
-        / = link_to_save_ingredient(di)
-
         = link_to_edit_ingredient()
         = link_to_new_ingredient()
-        -# Кнопка для удаления связи роль-пользователь. См. role_users_helper 
         = link_to_remove_ingredient(di)
       .clearfix
     .panel-body

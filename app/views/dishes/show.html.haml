@@ -1,3 +1,15 @@
+=breadcrumb_tag do
+  / %li.active
+  /   = t('headers.categories.edit')
+  %li.active
+    =link_to(@dish.name, @dish)
+  / %li
+  %li
+    = link_to 'Блюда', dishes_path
+  %li
+    Главное меню
+
+
 %p#notice= notice
 
 %p
@@ -11,8 +23,8 @@
   = @dish.instruction
 %p
   %b Category:
-  = @dish.category_id
-
-= link_to 'Edit', edit_dish_path(@dish)
-\|
+  = @dish.category.name
+- if user_admin? || (@dish.user == @current_user)
+  = link_to 'Edit', edit_dish_path(@dish)
+  \|
 = link_to 'Back', dishes_path

@@ -1,5 +1,6 @@
 class Dish < ActiveRecord::Base
   belongs_to :category
+  belongs_to :user
   has_many :dish_ingredients, dependent: :destroy, inverse_of: :dish
   has_many :ingredients, through: :dish_ingredients, inverse_of: :dish
 

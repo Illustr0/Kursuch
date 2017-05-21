@@ -1,11 +1,14 @@
 class DishesController < ApplicationController
-  before_action :set_dish, only: [:show, :edit, :update, :destroy]
+  before_action :set_dish, only: [:show, :update, :destroy]
+  before_action :get_dish, only: [:edit]
+  skip_before_action :check_app_auth
   # skip_before_action :verify_authenticity_token
 
   # GET /dishes
   # GET /dishes.json
   def index
     @dishes = Dish.all
+    # @dishes = Dish.where(user: @current_user)
   end
 
   # GET /dishes/1
@@ -16,6 +19,7 @@ class DishesController < ApplicationController
   # GET /dishes/new
   def new
     @dish = Dish.new
+    @dish.user = @current_user
   end
 
   # GET /dishes/1/edit
@@ -26,6 +30,7 @@ class DishesController < ApplicationController
   # POST /dishes.json
   def create
     @dish = Dish.new(dish_params)
+    @dish.user = @current_user
 
     respond_to do |format|
       if @dish.save
@@ -71,9 +76,17 @@ class DishesController < ApplicationController
       @dish = Dish.find(params[:id])
     end
 
+    def get_dish
+      @dish = Dish.find(params[:id])
+      if (@dish.user != @current_user) && !(user_admin?)
+        redirect_to dish_path(@dish)
+        flash[:danger] = 'У вас недостаточно прав!'
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def dish_params
-      params.require(:dish).permit(:name, :time_cook, :instruction, :category_id,
+      params.require(:dish).permit(:name, :time_cook, :instruction, :category_id, :user_id,
         dish_ingredients_attributes: [:_destroy, :dish_id, :ingredient_id, :how_many, :measure, :id,
           ingredient_attributes: [:id, :short_descr, :_destroy]
         ] 

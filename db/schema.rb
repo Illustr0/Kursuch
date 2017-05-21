@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510071150) do
+ActiveRecord::Schema.define(version: 20170521134555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,9 +61,11 @@ ActiveRecord::Schema.define(version: 20170510071150) do
     t.integer  "category_id", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
 
   add_index "dishes", ["category_id"], name: "index_dishes_on_category_id", using: :btree
+  add_index "dishes", ["user_id"], name: "index_dishes_on_user_id", using: :btree
 
   create_table "ingredients", force: :cascade do |t|
     t.text     "short_descr", null: false
@@ -138,6 +140,7 @@ ActiveRecord::Schema.define(version: 20170510071150) do
   add_foreign_key "dish_ingredients", "dishes"
   add_foreign_key "dish_ingredients", "ingredients"
   add_foreign_key "dishes", "categories"
+  add_foreign_key "dishes", "users"
   add_foreign_key "role_users", "roles"
   add_foreign_key "role_users", "users"
 end

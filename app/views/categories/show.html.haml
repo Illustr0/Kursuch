@@ -3,19 +3,23 @@
     = @category.name
   %li
     = link_to 'Категории', categories_path
+  %li
+    Главное меню
 
 %p#notice= notice
 
-%p
-  %b Name:
-  = @category.name
-%p
-  %b Category tree:
-  - if @category.category_tree.nil?
-    \root
-  - else
-    @category.category_tree.name
+%dl
+  %dt= Category.human_attribute_name(:name)
+  %dd= @category.name
 
-= link_to 'Edit', edit_category_path(@category)
-\|
-= link_to 'Back', categories_path
+  %dt= Category.human_attribute_name (:category_tree)
+  %dd
+    - if @category.category_tree.nil?
+      \root
+    - else
+      @category.category_tree.name
+
+- if user_admin?
+  = link_to edit_category_path(@category), class: 'btn btn-info' do
+    = fa_icon :edit
+    = t('buttons.edit')

@@ -1,7 +1,19 @@
+=breadcrumb_tag do
+  / %li.active
+  /   = t('headers.categories.edit')
+  / %li
+  /   = link_to(@category.name, @category)
+  / %li
+  %li.active
+    = link_to 'Блюда', dishes_path
+  %li
+    Главное меню
+
+
 .page-header
   %h1= t('headers.dishes.index')
 
-%table
+%table.table.table-hover.table-striped
   %thead
     %tr
       %th= Dish.human_attribute_name(:name)
@@ -9,20 +21,27 @@
       %th= Dish.human_attribute_name(:instruction)
       %th= Dish.human_attribute_name(:category)
       %th
-      %th
-      %th
 
   %tbody
     - @dishes.each do |dish|
       %tr
-        %td= dish.name
-        %td= dish.time_cook.strftime("%H часов %M минут")
-        %td= dish.instruction
-        %td= dish.category.name
-        %td= link_to 'Show', dish
-        %td= link_to 'Edit', edit_dish_path(dish)
-        %td= link_to 'Destroy', dish, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.center= dish.name
+        %td.center= dish.time_cook.strftime("%H часов %M минут")
+        %td.center= dish.instruction
+        %td.center= dish.category.name
+        %td.right
+          = link_to dish, class: 'btn btn-warning' do
+            = fa_icon(:eye) + ' Посмотреть'
+          - if user_admin? || (dish.user == @current_user)
+            = link_to edit_dish_path(dish), class: 'btn btn-info' do
+              = fa_icon :edit
+              = t('buttons.edit')
+            = link_to dish, :method => :delete, data: { confirm: 'Are you sure?' }, 
+            class: 'btn btn-danger' do
+              = fa_icon :times
+              = t('buttons.destroy')
 
 %br
-
-= link_to 'New Dish', new_dish_path
+- if user_admin?
+  = link_to new_dish_path, class: 'btn btn-success' do 
+    = fa_icon(:plus) + ' Новое блюдо'

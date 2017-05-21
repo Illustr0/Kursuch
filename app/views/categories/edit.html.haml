@@ -5,11 +5,10 @@
     = link_to(@category.name, @category)
   %li
     = link_to 'Категории', categories_path
+  %li
+    Главное меню
 
 .page-header
   %h1= t('headers.categories.edit')
-= render 'form'
 
-= link_to 'Show', @category
-\|
-= link_to 'Back', categories_path
+= render 'form'

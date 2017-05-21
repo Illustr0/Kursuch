@@ -1,38 +1,37 @@
 =breadcrumb_tag do
   %li.active
     = t('headers.categories.index')
-  / %li
-  /   = link_to(@user.email, @user)
-  / %li
-  /   = link_to 'Пользователи', users_path
-  / %li
-  /   Администрирование
+  %li
+    Главное меню
 
 .page-header
   %h1= t('headers.categories.index')
 
 .row
   .col-md-12
-    - @categories.each do |subcategory|
+    - @categories.each do |category|
       .form-group
-        = subcategory.name
-        - if (!subcategory.children.empty? && user_admin?)
+        = link_to category.name, category_path(category)
+        - if (!category.children.empty?)
           = link_to ?#, class: 'show-link' do
             = fa_icon :eye
           = link_to ?#, class: 'show-list hide-link' do
             = fa_icon('eye-slash')
-        = link_to edit_category_path(subcategory) do
-          = fa_icon :edit
-        = link_to subcategory, method: :delete, data: { confirm: 'Are you sure?' } do
-          = fa_icon :times
-        - if !subcategory.children.empty?
+        - if user_admin?
+          = link_to edit_category_path(category) do
+            = fa_icon :edit
+          = link_to category, method: :delete, data: { confirm: 'Are you sure?' } do
+            = fa_icon :times
+        - if !category.children.empty?
           .col-md-12.show-list
-            - subcategory.children.each do |child|
+            - category.children.each do |child|
               .form-group
-                = child.name
-                = link_to edit_category_path(child) do
-                  = fa_icon :edit
-                = link_to child, method: :delete, data: { confirm: 'Are you sure?' } do
-                  = fa_icon :times
+                = link_to child.name, category_path(child)
+                - if (user_admin?)
+                  = link_to edit_category_path(child) do
+                    = fa_icon :edit
+                  = link_to child, method: :delete, data: { confirm: 'Are you sure?' } do
+                    = fa_icon :times
 - if user_admin?
-  = link_to 'Новая категория', new_category_path, class: 'btn btn-success'
+  = link_to new_category_path, class: 'btn btn-success' do 
+    = fa_icon(:plus) + ' Новая категория'

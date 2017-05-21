@@ -7,6 +7,6 @@ class User < ActiveRecord::Base
 
   has_many :role_users, dependent: :destroy, inverse_of: :user 
   has_many :roles, through: :role_users 
-  
+  has_many :dishes 
   accepts_nested_attributes_for :role_users, allow_destroy: true
 end

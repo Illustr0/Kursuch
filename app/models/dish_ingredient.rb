@@ -1,6 +1,6 @@
 class DishIngredient < ActiveRecord::Base
   belongs_to :ingredient
-  belongs_to :dish
+  belongs_to :dish, inverse_of: :dish_ingredients
 
   # связь блюдо - ингредиент должно быть уникальным
   validates :dish_id, uniqueness: {scope: [:ingredient_id]}
