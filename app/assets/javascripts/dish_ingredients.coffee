@@ -62,7 +62,7 @@
       window.del_one_di($(this))
       false  
     panel.find('.show_for_choose').hide()
-    panel.find('.show_for_choose').last().remove()
+    #panel.find('.show_for_choose').last().remove()
     panel.find('.show_for_choose').last().show()
     panel.find('#new_ingredient_link').on 'click', ->
       window.new_ingr_form($(this))
