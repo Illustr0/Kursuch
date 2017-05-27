@@ -19,6 +19,13 @@ module SideBarHelper
       :controller => :dishes, 
       :action => :index
     }
+    result << {
+      :name => 'Поиск',
+      :icon => 'search',
+      :controller => :dishes, 
+      :action => :search
+    }
+
 
     result << {
       :name => 'Администрирование',

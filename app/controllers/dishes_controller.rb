@@ -4,6 +4,15 @@ class DishesController < ApplicationController
   skip_before_action :check_app_auth
   # skip_before_action :verify_authenticity_token
 
+  def search
+    if params.has_key?('search')
+      @dishes = Dish.search(params['search'])
+    else
+      @dishes = []
+    end
+    params['search'] ||= {}
+  end
+  
   # GET /dishes
   # GET /dishes.json
   def index

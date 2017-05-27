@@ -1,0 +1,48 @@
+/ http://localhost:3000/rails/info/routes
+= link_to 'Clear', search_dishes_path()
+= form_tag search_dishes_path(), method: :get do
+  %b Dish:
+  = text_field_tag 'search[name]', params['search']['name'], class: 'form-control'
+  %br
+  %b Main Ingredient:
+  = text_field_tag 'search[ingredient]', params['search']['ingredient'], class: 'form-control'
+  %br
+  %b Category:
+  = select(:search, :category, (Category.pluck('name, id')), include_blank: true)
+  %br
+
+  = submit_tag 'Search'
+
+- if @dishes
+  %ol
+    - @dishes.each_slice(2) do |d1, d2|
+      .row
+        .col-md-6
+          .form-group
+            %li
+              %b= d1.name
+              %i= '(время приготовления ' + d1.time_cook.strftime('%Hч %Mмин') + ')'
+            Категория: 
+            %i= d1.category.name
+            %br
+            - if !d1.ingredients.blank?
+              Для приготовления требуется:
+              %ul
+                - d1.ingredients.each do |ingr|
+                  %li= ingr.short_descr
+              %br
+        - if d2
+          .col-md-6
+            .form-group
+              %li
+                %b= d2.name
+                %i= '(время приготовления ' + d2.time_cook.strftime('%Hч %Mмин') + ')'
+              Категория: 
+              %i= d2.category.name
+              %br
+              - if !d2.ingredients.blank?
+                Для приготовления требуется:
+                %ul
+                  - d2.ingredients.each do |ingr|
+                    %li= ingr.short_descr
+                %br
