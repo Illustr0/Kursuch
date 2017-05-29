@@ -1,17 +1,23 @@
 / http://localhost:3000/rails/info/routes
 = link_to 'Clear', search_dishes_path()
 = form_tag search_dishes_path(), method: :get do
-  %b Dish:
+  %b Название блюда:
   = text_field_tag 'search[name]', params['search']['name'], class: 'form-control'
   %br
-  %b Main Ingredient:
+  %b Ингредиент:
   = text_field_tag 'search[ingredient]', params['search']['ingredient'], class: 'form-control'
   %br
-  %b Category:
-  = select(:search, :category, (Category.pluck('name, id')), include_blank: true)
+  %b Категория:
+  = select(:search, :category, (Category.pluck('name, id')), {include_blank: true}, class: 'form-control')
+  %br
+  %b Время приготовления:
+  = time_select(:search, :time_cook, prompt: {hour: 'Choose hour', minute: 'Choose minute'})
+  -# bad decision
+  -# = time_select(:search, :time_cook, {prompt: {hour: 'Choose hour', minute: 'Choose minute'}}, class: 'form-control')
   %br
 
-  = submit_tag 'Search'
+  = submit_tag 'Поиск', class: 'btn btn-success'
+%br
 
 - if @dishes
   %ol
