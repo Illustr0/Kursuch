@@ -7,6 +7,7 @@
 .navbar-inverse
   z-index: 1000
   position: fixed
+  bottom: 0
   width: 100%
   height: $navbar-height
   .nav.navbar-nav
@@ -30,12 +31,25 @@
         &:hover
           background: $navbar-inverse-link-hover-bg !important
   #bs-example-navbar-collapse-1
+    //position: absolute
     max-height: 250px
     overflow: auto
     margin: 0 0 0 0
     a
       background-color: $navbar-inverse-bg
-
+@media (max-width: $screen-xs-max)
+  #bs-example-navbar-collapse-1
+    position: fixed
+    bottom: 0
+    padding-bottom: $navbar-height
+    width: 95%
+    z-index: -1
+    max-height: 250px
+    overflow: auto
+    margin: 0 0 0 0
+    a
+      background-color: $navbar-inverse-bg
+      
 .navbar-brand
   //height: 50px
   height: auto
