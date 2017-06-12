@@ -8,12 +8,11 @@
   = text_field_tag 'search[ingredient]', params['search']['ingredient'], class: 'form-control'
   %br
   %b Категория:
-  = select(:search, :category, (Category.pluck('name, id')), {include_blank: true}, class: 'form-control')
+  = select_tag 'search[category]', options_for_select(Category.pluck('name, id'), params['search']['category']),include_blank: true, class: 'form-control'
   %br
   %b Время приготовления:
-  = time_select(:search, :time_cook, prompt: {hour: 'Choose hour', minute: 'Choose minute'})
-  -# bad decision
-  -# = time_select(:search, :time_cook, {prompt: {hour: 'Choose hour', minute: 'Choose minute'}}, class: 'form-control')
+  = time_select(:search, :time_cook, prompt: {hour: params['search']['time_cook(4i)'] || 'Часы', minute: params['search']['time_cook(5i)'] || 'Минуты'})
+  / %br= "params #{params}"
   %br
 
   = submit_tag 'Поиск', class: 'btn btn-success'

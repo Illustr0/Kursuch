@@ -17,7 +17,7 @@
     - if @category.category_tree.nil?
       \root
     - else
-      @category.category_tree.name
+      = @category.category_tree.name
 
 - if user_admin?
   = link_to edit_category_path(@category), class: 'btn btn-info' do

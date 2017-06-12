@@ -45,6 +45,12 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
+        if !@category.category_tree_id.nil? && !@category.children.empty?
+          @category.children.each do |c|
+            c.category_tree_id = @category.category_tree_id
+            c.save
+          end
+        end
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
       else
